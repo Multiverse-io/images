@@ -38,7 +38,7 @@ jobs:
           tags: ${{ env.TEST_TAG }}
       -
         name: Scan image
-        run: docker run --rm aquasec/trivy image --exit-code 1 $image_name:latest
+        run: docker run --rm aquasec/trivy image --exit-code 1 ${{ env.TEST_TAG }}
       -
         name: Build and push
         uses: docker/build-push-action@v2
