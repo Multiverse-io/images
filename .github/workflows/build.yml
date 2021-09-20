@@ -41,6 +41,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ env.TEST_TAG }}
+          exit-code: 1
       -
         name: Build and push
         uses: docker/build-push-action@v2
