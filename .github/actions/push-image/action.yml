@@ -15,38 +15,37 @@ inputs:
 runs:
   using: "composite"
   steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ inputs.registry_password }}
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ inputs.registry_password }}
 
-      - name: Build and export to Docker
-        uses: docker/build-push-action@v2
-        with:
-          context: ${{ inputs.context }}
-          platforms: linux/amd64
-          load: true
-          tags: ${{ inputs.tag }}
+    - name: Build and export to Docker
+      uses: docker/build-push-action@v2
+      with:
+        context: ${{ inputs.context }}
+        platforms: linux/amd64
+        load: true
+        tags: ${{ inputs.tag }}
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: ${{ inputs.tag }}
-          exit-code: 1
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ${{ inputs.tag }}
+        exit-code: 1
 
-      - name: Build and push
-        if: ${{ github.ref == 'refs/heads/main' }}
-        uses: docker/build-push-action@v2
-        with:
-          context: ${{ inputs.context }}
-          platforms: linux/amd64
-          push: true
-          tags: ${{ inputs.tag }}
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: ${{ inputs.context }}
+        platforms: linux/amd64
+        push: ${{ github.ref == 'refs/heads/main' }}
+        tags: ${{ inputs.tag }}
