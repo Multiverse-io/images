@@ -6,6 +6,7 @@ on:
       - 'main'
     paths:
       - 'elixir-ci/**'
+  workflow_dispatch:
 
 env:
   TAG: ghcr.io/multiverse-io/elixir-ci:1.12.2-erlang-24.0.4-alpine-3.14.0

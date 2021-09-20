@@ -6,6 +6,7 @@ on:
       - 'main'
     paths:
       - 'platform-production/**'
+  workflow_dispatch:
 
 env:
   TAG: ghcr.io/multiverse-io/platform-production:alpine-3.14.0
