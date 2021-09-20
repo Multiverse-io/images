@@ -1,12 +1,14 @@
-name: build
+name: elixir-ci
 
 on:
   push:
     branches:
       - 'main'
+    paths:
+      - 'elixir-ci/**'
 
 env:
-  TEST_TAG: elixir-ci:test
+  TAG: ghcr.io/multiverse-io/elixir-ci:1.12.2-erlang-24.0.4-alpine-3.14.0
 
 jobs:
   docker:
@@ -35,12 +37,12 @@ jobs:
           context: ./elixir-ci
           platforms: linux/amd64
           load: true
-          tags: ${{ env.TEST_TAG }}
+          tags: ${{ env.TAG }}
       -
         name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ env.TEST_TAG }}
+          image-ref: ${{ env.TAG }}
           exit-code: 1
       -
         name: Build and push
@@ -49,5 +51,5 @@ jobs:
           context: ./elixir-ci
           platforms: linux/amd64
           push: true
-          tags: |
-            ghcr.io/multiverse-io/elixir-ci:test
+          tags: ${{ env.TAG }}
+
