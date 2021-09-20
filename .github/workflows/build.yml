@@ -33,4 +33,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/Multiverse-io/elixir-ci:test
+            ghcr.io/multiverse-io/elixir-ci:test
