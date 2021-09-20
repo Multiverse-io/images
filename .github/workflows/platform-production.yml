@@ -20,3 +20,4 @@ jobs:
         with:
           tag: ghcr.io/multiverse-io/platform-production:alpine-3.14.0
           context: ./platform-production
+          registry_password: ${{ secrets.GITHUB_TOKEN }}

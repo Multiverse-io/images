@@ -20,3 +20,4 @@ jobs:
         with:
           tag: ghcr.io/multiverse-io/elixir-ci:1.12.2-erlang-24.0.4-alpine-3.14.0
           context: ./elixir-ci
+          registry_password: ${{ secrets.GITHUB_TOKEN }}
