@@ -43,8 +43,8 @@ runs:
           exit-code: 1
 
       - name: Build and push
-        uses: docker/build-push-action@v2
         if: ${{ github.ref == 'refs/heads/main' }}
+        uses: docker/build-push-action@v2
         with:
           context: ${{ inputs.context }}
           platforms: linux/amd64
