@@ -8,6 +8,9 @@ inputs:
   context:
     description: "Path to directory containing Dockerfile"
     required: true
+  registry_password:
+    description: "GITHUB_TOKEN"
+    required: true
 
 runs:
   using: "composite"
@@ -24,7 +27,7 @@ runs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ inputs.registry_password }}
       -
         name: Build and export to Docker
         uses: docker/build-push-action@v2
