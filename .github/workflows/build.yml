@@ -37,8 +37,10 @@ jobs:
           load: true
           tags: ${{ env.TEST_TAG }}
       -
-        name: Scan image
-        run: docker run --rm aquasec/trivy image --exit-code 1 ${{ env.TEST_TAG }}
+        name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.TEST_TAG }}
       -
         name: Build and push
         uses: docker/build-push-action@v2
