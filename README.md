@@ -2,7 +2,7 @@
 
 This repo contains the Dockerfiles for our public images which are hosted in GitHub Container Registry.
 
-This is only for *public* images - *DO NOT* publish images with private code into this repository. Our private docker images live on Amazon ECR.
+This is only for **public** images - **DO NOT** publish images with private code into this repository. Our private docker images live on Amazon ECR.
 
 All images are automatically built and pushed on the `main` branch.
 
