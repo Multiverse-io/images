@@ -20,6 +20,6 @@ jobs:
       - name: Build and push image
         uses: ./.github/actions/push-image
         with:
-          tag: ghcr.io/multiverse-io/platform-production:alpine-3.14.0
+          tag: ghcr.io/multiverse-io/platform-production:alpine-3.14.2
           context: ./platform-production
           registry_password: ${{ secrets.GITHUB_TOKEN }}

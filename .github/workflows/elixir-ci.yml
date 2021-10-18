@@ -20,6 +20,6 @@ jobs:
       - name: Build and push image
         uses: ./.github/actions/push-image
         with:
-          tag: ghcr.io/multiverse-io/elixir-ci:1.12.2-erlang-24.0.4-alpine-3.14.0
+          tag: ghcr.io/multiverse-io/elixir-ci:1.12.3-erlang-24.1.2-alpine-3.14.2
           context: ./elixir-ci
           registry_password: ${{ secrets.GITHUB_TOKEN }}
