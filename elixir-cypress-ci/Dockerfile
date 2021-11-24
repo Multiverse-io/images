@@ -1,4 +1,4 @@
-FROM hexpm/elixir:1.12.3-erlang-24.1.2-ubuntu-focal-20210325
+FROM hexpm/elixir:1.12.3-erlang-24.1.2-bullseye-20210902-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y
