@@ -1,0 +1,11 @@
+FROM hexpm/elixir:1.12.3-erlang-24.1.2-ubuntu-focal-20210325
+
+RUN sudo apt-get update
+RUN sudo apt-get install python3-pip postgresql-client jq nodejs yarn bc git imagemagick brotli wkhtmltopdf bash openssh-client libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
+RUN pip install awscli virtualenv requests boto3 --upgrade
+
+RUN mix local.hex --force
+RUN mix local.rebar --force
+
+CMD ["iex"]
