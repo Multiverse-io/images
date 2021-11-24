@@ -37,6 +37,7 @@ runs:
         tags: ${{ inputs.tag }}
 
     - name: Run Trivy vulnerability scanner
+      if: inputs.context != './elixir-cypress-ci'
       uses: aquasecurity/trivy-action@master
       with:
         image-ref: ${{ inputs.tag }}
