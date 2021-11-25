@@ -11,6 +11,7 @@ All images are automatically built and pushed on the `main` branch.
 | Name      | Description |
 | --------- | ----------- |
 | elixir-ci | Used for elixir builds in CI. Based on hexpm/elixir alpine images and contain a few extras packages |
+| elixir-cypress-ci | Used for elixir builds in CI where we need to run cypress (as cypress can't be installed on Alpine) |
 | platform-production | Base image for our production builds. Alpine with a few extra packages |
 
 ### Image tags

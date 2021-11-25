@@ -1,0 +1,25 @@
+name: elixir-cypress-ci
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'elixir-cypress-ci/**'
+  workflow_dispatch:
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build and push image
+        uses: ./.github/actions/push-image
+        with:
+          tag: ghcr.io/multiverse-io/elixir-cypress-ci:1.12.3-erlang-24.1.2-debian-bullseye-20210902-slim
+          context: ./elixir-cypress-ci
+          registry_password: ${{ secrets.GITHUB_TOKEN }}
