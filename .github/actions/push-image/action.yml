@@ -14,6 +14,10 @@ inputs:
   registry_password:
     description: "GITHUB_TOKEN"
     required: true
+  skip_security_scan:
+    description: "If true skip lacework security scan"
+    default: false
+    required: false
   lacework_access_token:
     description: "LW_ACCESS_TOKEN"
     required: true
@@ -43,7 +47,7 @@ runs:
         tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
 
     - name: Run Lacework vulnerability scanner
-      if: inputs.context != './elixir-cypress-ci'
+      if: inputs.skip_security_scan
       shell: bash
       run: |
         curl -L https://github.com/lacework/lacework-vulnerability-scanner/releases/latest/download/lw-scanner-linux-amd64 -o lw-scanner
