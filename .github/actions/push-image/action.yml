@@ -41,6 +41,7 @@ runs:
 
     - name: Run Lacework vulnerability scanner
       if: inputs.context != './elixir-cypress-ci'
+      shell: bash
       run: |
         curl -L https://github.com/lacework/lacework-vulnerability-scanner/releases/latest/download/lw-scanner-linux-amd64 -o lw-scanner
         chmod +x lw-scanner
