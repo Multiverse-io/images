@@ -20,6 +20,7 @@ jobs:
       - name: Build and push image
         uses: ./.github/actions/push-image
         with:
-          tag: ghcr.io/multiverse-io/elixir-cypress-ci:1.12.3-erlang-24.1.2-debian-bullseye-20210902-slim
+          image_name: ghcr.io/multiverse-io/elixir-cypress-ci
+          image_tag: 1.12.3-erlang-24.1.2-debian-bullseye-20210902-slim
           context: ./elixir-cypress-ci
           registry_password: ${{ secrets.GITHUB_TOKEN }}

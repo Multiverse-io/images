@@ -2,7 +2,10 @@ name: "Push image"
 description: "Build, scan and push image to GitHub Container Registry"
 
 inputs:
-  tag:
+  image_name:
+    description: "Docker image name"
+    required: true
+  image_tag:
     description: "Docker image tag"
     required: true
   context:
@@ -34,14 +37,18 @@ runs:
         context: ${{ inputs.context }}
         platforms: linux/amd64
         load: true
-        tags: ${{ inputs.tag }}
+        tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
 
-    - name: Run Trivy vulnerability scanner
+    - name: Run Lacework vulnerability scanner
       if: inputs.context != './elixir-cypress-ci'
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: ${{ inputs.tag }}
-        exit-code: 1
+      run: |
+        curl -L https://github.com/lacework/lacework-vulnerability-scanner/releases/latest/download/lw-scanner-linux-amd64 -o lw-scanner
+        chmod +x lw-scanner
+        ./lw-scanner image evaluate ${{ inputs.image_name }} ${{ inputs.image_tag }} --build-id ${{ github.run_id }}
+      env:
+        LW_ACCESS_TOKEN: ${{ secrets.LW_ACCESS_TOKEN }}
+        LW_ACCOUNT_NAME: ${{ secrets.LW_ACCOUNT_NAME }}
+        LW_ACCOUNT_SUFFIX: ${{ secrets.LW_ACCOUNT_SUFFIX }}
 
     - name: Build and push
       uses: docker/build-push-action@v2
@@ -49,4 +56,4 @@ runs:
         context: ${{ inputs.context }}
         platforms: linux/amd64
         push: ${{ github.ref == 'refs/heads/main' }}
-        tags: ${{ inputs.tag }}
+        tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
