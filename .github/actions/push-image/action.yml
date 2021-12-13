@@ -47,9 +47,9 @@ runs:
         chmod +x lw-scanner
         ./lw-scanner image evaluate ${{ inputs.image_name }} ${{ inputs.image_tag }} --build-id ${{ github.run_id }}
       env:
-        LW_ACCESS_TOKEN: ${{ secrets.LW_ACCESS_TOKEN }}
-        LW_ACCOUNT_NAME: ${{ secrets.LW_ACCOUNT_NAME }}
-        LW_ACCOUNT_SUFFIX: ${{ secrets.LW_ACCOUNT_SUFFIX }}
+        LW_ACCESS_TOKEN: ${{ inputs.lacework_access_token }}
+        LW_ACCOUNT_NAME: multiverse
+        LW_ACCOUNT_SUFFIX: fra.lacework.net
 
     - name: Build and push
       uses: docker/build-push-action@v2

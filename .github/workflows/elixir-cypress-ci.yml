@@ -24,3 +24,4 @@ jobs:
           image_tag: 1.12.3-erlang-24.1.2-debian-bullseye-20210902-slim
           context: ./elixir-cypress-ci
           registry_password: ${{ secrets.GITHUB_TOKEN }}
+          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
