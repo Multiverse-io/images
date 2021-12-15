@@ -59,8 +59,13 @@ runs:
         LW_ACCOUNT_NAME: multiverse
         LW_ACCOUNT_SUFFIX: fra.lacework.net
 
+    - uses: actions/upload-artifact@v2
+      with:
+        name: report.json
+        path: report.json
+
     - name: Fail if vulnerabilities found
-      if: inputs.fail_on_security_vulnerabilities
+      if: inputs.fail_on_security_vulnerabilities == 'true'
       shell: bash
       run: |
         cat report.json | jq -e '.cve.critical_vulnerabilities == 0' > /dev/null || (echo "critical vulnerabilities found" && false)
