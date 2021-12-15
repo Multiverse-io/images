@@ -52,7 +52,15 @@ runs:
       run: |
         curl -L https://github.com/lacework/lacework-vulnerability-scanner/releases/latest/download/lw-scanner-linux-amd64 -o lw-scanner
         chmod +x lw-scanner
-        ./lw-scanner image evaluate ${{ inputs.image_name }} ${{ inputs.image_tag }} --build-id ${{ github.run_id }}
+        ./lw-scanner image evaluate ${{ inputs.image_name }} ${{ inputs.image_tag }} --build-id ${{ github.run_id }} -v=false > report.json
+
+        cat report.json
+
+        cat report.json | jq -e '.cve.critical_vulnerabilities == 0'
+        cat report.json | jq -e '.cve.high_vulnerabilities == 0'
+        cat report.json | jq -e '.cve.medium_vulnerabilities == 0'
+        cat report.json | jq -e '.cve.low_vulnerabilities == 0'
+        cat report.json | jq -e '.cve.info_vulnerabilities == 0'
       env:
         LW_ACCESS_TOKEN: ${{ inputs.lacework_access_token }}
         LW_ACCOUNT_NAME: multiverse
