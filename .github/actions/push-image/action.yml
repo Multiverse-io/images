@@ -2,7 +2,10 @@ name: "Push image"
 description: "Build, scan and push image to GitHub Container Registry"
 
 inputs:
-  tag:
+  image_name:
+    description: "Docker image name"
+    required: true
+  image_tag:
     description: "Docker image tag"
     required: true
   context:
@@ -10,6 +13,13 @@ inputs:
     required: true
   registry_password:
     description: "GITHUB_TOKEN"
+    required: true
+  fail_on_security_vulnerabilities:
+    description: "If false allow security vulnerabilities in built image"
+    default: true
+    required: false
+  lacework_access_token:
+    description: "LW_ACCESS_TOKEN"
     required: true
 
 runs:
@@ -34,14 +44,35 @@ runs:
         context: ${{ inputs.context }}
         platforms: linux/amd64
         load: true
-        tags: ${{ inputs.tag }}
+        tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
 
-    - name: Run Trivy vulnerability scanner
-      if: inputs.context != './elixir-cypress-ci'
-      uses: aquasecurity/trivy-action@master
+    - name: Run Lacework vulnerability scanner
+      shell: bash
+      run: |
+        curl -L https://github.com/lacework/lacework-vulnerability-scanner/releases/latest/download/lw-scanner-linux-amd64 -o lw-scanner
+        chmod +x lw-scanner
+        ./lw-scanner image evaluate ${{ inputs.image_name }} ${{ inputs.image_tag }} --build-id ${{ github.run_id }} -v=false > report.json
+
+        cat report.json
+      env:
+        LW_ACCESS_TOKEN: ${{ inputs.lacework_access_token }}
+        LW_ACCOUNT_NAME: multiverse
+        LW_ACCOUNT_SUFFIX: fra.lacework.net
+
+    - uses: actions/upload-artifact@v2
       with:
-        image-ref: ${{ inputs.tag }}
-        exit-code: 1
+        name: report.json
+        path: report.json
+
+    - name: Fail if vulnerabilities found
+      if: inputs.fail_on_security_vulnerabilities == 'true'
+      shell: bash
+      run: |
+        cat report.json | jq -e '.cve.critical_vulnerabilities == 0' > /dev/null || (echo "critical vulnerabilities found" && false)
+        cat report.json | jq -e '.cve.high_vulnerabilities == 0' > /dev/null || (echo "high vulnerabilities found" && false)
+        cat report.json | jq -e '.cve.medium_vulnerabilities == 0' > /dev/null || (echo "medium vulnerabilities found" && false)
+        cat report.json | jq -e '.cve.low_vulnerabilities == 0' > /dev/null || (echo "low vulnerabilities found" && false)
+        cat report.json | jq -e '.cve.info_vulnerabilities == 0' > /dev/null || (echo "info vulnerabilities found" && false)
 
     - name: Build and push
       uses: docker/build-push-action@v2
@@ -49,4 +80,4 @@ runs:
         context: ${{ inputs.context }}
         platforms: linux/amd64
         push: ${{ github.ref == 'refs/heads/main' }}
-        tags: ${{ inputs.tag }}
+        tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
