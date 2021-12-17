@@ -6,6 +6,8 @@ RUN apk upgrade --no-cache
 
 RUN pip install awscli virtualenv requests boto3 --upgrade
 
+RUN apk -X http://dl-cdn.alpinelinux.org/alpine/edge/testing add github-cli
+
 RUN mix local.hex --force
 RUN mix local.rebar --force
 
