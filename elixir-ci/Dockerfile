@@ -4,7 +4,7 @@ RUN apk add --no-cache curl python3 py3-pip postgresql-client jq nodejs-current~
 
 RUN apk upgrade --no-cache
 
-RUN pip install awscli virtualenv requests boto3 --upgrade
+RUN pip install pip awscli virtualenv requests boto3 --upgrade
 
 RUN apk -X http://dl-cdn.alpinelinux.org/alpine/edge/testing add github-cli
 
