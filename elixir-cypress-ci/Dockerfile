@@ -1,10 +1,37 @@
-FROM hexpm/elixir:1.12.3-erlang-24.1.2-debian-bullseye-20210902-slim
+FROM hexpm/elixir:1.13.1-erlang-24.2-debian-bullseye-20210902-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get dist-upgrade -y
-RUN apt-get install -y python3-pip postgresql-client jq nodejs npm bc git imagemagick brotli wkhtmltopdf bash openssh-client libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
+RUN apt-get install -y curl bash
+
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+
+RUN apt-get install -y \
+    bc \
+    brotli \
+    git \
+    imagemagick \
+    jq \
+    libasound2 \
+    libgbm-dev \
+    libgconf-2-4 \
+    libgtk-3-0 \
+    libgtk2.0-0 \
+    libnotify-dev \
+    libnss3 \
+    libxss1 \
+    libxtst6 \
+    nodejs \
+    openssh-client \
+    postgresql-client \
+    python3-pip \
+    wkhtmltopdf \
+    xauth \
+    xvfb
+
 RUN npm install --global yarn
 
 RUN pip install awscli virtualenv requests boto3 --upgrade

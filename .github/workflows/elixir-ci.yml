@@ -21,7 +21,7 @@ jobs:
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-ci
-          image_tag: 1.12.3-erlang-24.1.2-alpine-3.14.2
+          image_tag: 1.13.1-erlang-24.2-alpine-3.14.2
           context: ./elixir-ci
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
