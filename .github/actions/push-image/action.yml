@@ -53,6 +53,8 @@ runs:
         chmod +x lw-scanner
         ./lw-scanner image evaluate ${{ inputs.image_name }} ${{ inputs.image_tag }} --build-id ${{ github.run_id }} -v=false --fixable --disable-library-package-scanning > report.json
 
+        sed -i '/INFO/d' report.json
+
         cat report.json
       env:
         LW_ACCESS_TOKEN: ${{ inputs.lacework_access_token }}
