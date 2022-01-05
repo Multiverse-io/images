@@ -4,6 +4,8 @@ RUN apk add --no-cache curl python3 py3-pip postgresql-client jq nodejs-current~
 
 RUN apk upgrade --no-cache
 
+RUN pip install -U pip
+
 RUN pip install awscli virtualenv requests boto3 --upgrade
 
 RUN mix local.hex --force
