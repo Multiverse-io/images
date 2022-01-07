@@ -21,7 +21,7 @@ jobs:
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/platform-production
-          image_tag: alpine-3.14.2
+          image_tag: alpine-3.14.3
           context: ./platform-production
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
