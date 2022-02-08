@@ -60,6 +60,7 @@ runs:
         LW_ACCESS_TOKEN: ${{ inputs.lacework_access_token }}
         LW_ACCOUNT_NAME: multiverse
         LW_ACCOUNT_SUFFIX: fra.lacework.net
+        LW_SCANNER_DISABLE_UPDATES: true
 
     - uses: actions/upload-artifact@v2
       with:
