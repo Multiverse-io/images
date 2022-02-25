@@ -1,8 +1,8 @@
 FROM lacework/datacollector:latest-sidecar AS lacework-collector
 
-FROM alpine:3.14.3
+FROM alpine:3.15.0
 
-RUN apk add --no-cache imagemagick curl postgresql-client wkhtmltopdf bash jq ttf-dejavu ttf-droid ttf-freefont ttf-liberation openssl util-linux
+RUN apk add --no-cache imagemagick curl postgresql13-client chromium bash jq openssl util-linux nodejs~=16
 
 RUN apk upgrade --no-cache
 
