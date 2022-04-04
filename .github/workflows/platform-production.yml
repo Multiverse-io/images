@@ -9,6 +9,8 @@ on:
   workflow_dispatch:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
+  schedule:
+    - cron: '25 7 * * 1-5'
 
 jobs:
   docker:
