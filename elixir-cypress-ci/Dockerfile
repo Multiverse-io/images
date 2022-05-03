@@ -1,4 +1,4 @@
-FROM hexpm/elixir:1.13.2-erlang-24.2.1-debian-bullseye-20210902-slim
+FROM hexpm/elixir:1.13.3-erlang-24.3.4-debian-bullseye-20210902-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y
