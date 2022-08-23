@@ -30,7 +30,8 @@ RUN apt-get install -y \
     python3-pip \
     wkhtmltopdf \
     xauth \
-    xvfb
+    xvfb \
+    chromium
 
 RUN npm install --global yarn
 
