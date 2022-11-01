@@ -21,7 +21,7 @@ jobs:
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-cypress-ci
-          image_tag: 1.14.0-erlang-25.0.4-debian-bullseye-20220801-slim
+          image_tag: 1.14.1-erlang-25.1.2-debian-bullseye-20221004-slim
           context: ./elixir-cypress-ci
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           fail_on_security_vulnerabilities: false
