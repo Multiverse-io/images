@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 hexpm/elixir:1.14.2-erlang-25.1.2-debian-bullseye-20221004-slim
+FROM hexpm/elixir:1.14.2-erlang-25.1.2-debian-bullseye-20221004-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update -y
