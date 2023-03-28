@@ -30,6 +30,7 @@ RUN apt install -y --no-install-recommends \
     xauth \
     xvfb
 
+# Install yarn using corepack
 RUN corepack enable
 
 RUN mix local.hex --force
