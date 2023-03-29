@@ -1,41 +1,37 @@
 FROM hexpm/elixir:1.14.2-erlang-25.1.2-debian-bullseye-20221004-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update -y
-RUN apt-get upgrade -y
-RUN apt-get dist-upgrade -y
+RUN apt update -y
+RUN apt upgrade -y
+RUN apt dist-upgrade -y
 
-RUN apt-get install -y curl bash
+RUN apt install -y curl bash
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 
-RUN apt-get install -y \
-    bc \
-    brotli \
-    git \
-    imagemagick \
-    jq \
-    libasound2 \
-    libgbm-dev \
-    libgconf-2-4 \
-    libgtk-3-0 \
-    libgtk2.0-0 \
-    libnotify-dev \
-    libnss3 \
-    libxss1 \
-    libxtst6 \
+RUN apt install -y --no-install-recommends \
     nodejs \
     openssh-client \
     postgresql-client \
-    python3-pip \
-    wkhtmltopdf \
+    git \
+    imagemagick \
+
+    # cypress deps from here https://docs.cypress.io/guides/continuous-integration/introduction#Dependencies
+
+    libgtk2.0-0 \
+    libgtk-3-0 \
+    libgbm-dev \
+    libnotify-dev \
+    libgconf-2-4 \
+    libnss3 \
+    libxss1 \
+    libasound2 \
+    libxtst6 \
     xauth \
-    xvfb \
-    chromium
+    xvfb
 
-RUN npm install --global yarn
-
-RUN pip install awscli virtualenv requests boto3 --upgrade
+# Install yarn using corepack
+RUN corepack enable
 
 RUN mix local.hex --force
 RUN mix local.rebar --force
