@@ -13,6 +13,8 @@ RUN apt install -y --no-install-recommends \
     nodejs \
     openssh-client \
     postgresql-client \
+    make \
+    gcc \
     git \
     imagemagick \
 
