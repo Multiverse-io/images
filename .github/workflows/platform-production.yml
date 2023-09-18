@@ -27,3 +27,8 @@ jobs:
           context: ./platform-production
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
+
+      - name: Prevent GitHub from disabling workflow due to inactivity
+        uses: gautamkrishnar/keepalive-workflow@v1
+        with:
+          committer_email: engineering@multiverse.io
