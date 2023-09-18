@@ -3,9 +3,9 @@ name: elixir-ci
 on:
   push:
     branches:
-      - 'main'
+      - "main"
     paths:
-      - 'elixir-ci/**'
+      - "elixir-ci/**"
   workflow_dispatch:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
@@ -17,11 +17,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Build and push image
+      - name: Build and push Alpine image
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-ci
           image_tag: 1.14.2-erlang-25.1.2-alpine-3.16.2
-          context: ./elixir-ci
+          context: ./elixir-ci/alpine
+          registry_password: ${{ secrets.GITHUB_TOKEN }}
+          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
+
+      - name: Build and push Debian image
+        uses: ./.github/actions/push-image
+        with:
+          image_name: ghcr.io/multiverse-io/elixir-ci
+          image_tag: 1.15.2-erlang-26.0.2-debian-bookworm-20230612-slim
+          context: ./elixir-ci/debian
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
