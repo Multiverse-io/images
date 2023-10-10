@@ -1,6 +1,6 @@
 FROM lacework/datacollector:latest-sidecar AS lacework-collector
 
-FROM alpine:3.18.0
+FROM alpine:3.18.4
 
 RUN apk add --no-cache imagemagick curl postgresql13-client chromium bash jq openssl util-linux nodejs~=18
 

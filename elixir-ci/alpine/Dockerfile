@@ -1,4 +1,4 @@
-FROM hexpm/elixir:1.14.2-erlang-25.1.2-alpine-3.18.0
+FROM hexpm/elixir:1.14.5-erlang-26.1.2-alpine-3.18.4
 
 RUN apk add --no-cache curl python3 py3-pip postgresql13-client jq nodejs~=18 yarn bc git build-base imagemagick brotli chromium bash openssh-client docker-cli xvfb libc6-compat tar
 
