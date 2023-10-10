@@ -7,7 +7,7 @@ RUN apt dist-upgrade -y
 
 RUN apt install -y curl bash
 
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 
 RUN apt install -y --no-install-recommends \
     nodejs \
