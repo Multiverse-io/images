@@ -17,9 +17,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Build and push image
+      - name: Build and push image alpine 3.18.0
+        uses: ./.github/actions/push-image
+        with:
+          image_name: ghcr.io/multiverse-io/platform-production
+          image_tag: alpine-3.18.0
+          context: ./platform-production
+          registry_password: ${{ secrets.GITHUB_TOKEN }}
+          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
+          build_args: |
+            ALPINE_VERSION=3.18.0
+
+      - name: Build and push image alpine 3.18.4
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/platform-production
@@ -27,6 +38,8 @@ jobs:
           context: ./platform-production
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
+          build_args: |
+            ALPINE_VERSION=3.18.4
 
       - name: Prevent GitHub from disabling workflow due to inactivity
         uses: gautamkrishnar/keepalive-workflow@v1
