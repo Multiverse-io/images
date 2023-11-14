@@ -1,6 +1,8 @@
+ARG ALPINE_VERSION
 FROM lacework/datacollector:latest-sidecar AS lacework-collector
 
-FROM alpine:3.18.0
+ARG ALPINE_VERSION
+FROM alpine:${ALPINE_VERSION}
 
 RUN apk add --no-cache imagemagick curl postgresql13-client chromium bash jq openssl util-linux nodejs~=18
 
