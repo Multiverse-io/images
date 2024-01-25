@@ -1,4 +1,4 @@
-FROM hexpm/elixir:1.15.6-erlang-26.1.1-debian-bookworm-20230612-slim
+FROM hexpm/elixir:1.16.0-erlang-26.2.1-debian-bookworm-20231009-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update -y
