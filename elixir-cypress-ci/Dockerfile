@@ -1,16 +1,22 @@
-FROM hexpm/elixir:1.14.2-erlang-25.1.2-debian-bullseye-20221004-slim
+ARG ELIXIR_VERSION
+ARG ERLANG_VERSION
+ARG DEBIAN_VERSION
+
+FROM hexpm/elixir:${ELIXIR_VERSION}-erlang-${ERLANG_VERSION}-debian-${DEBIAN_VERSION}
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update -y
 RUN apt upgrade -y
 RUN apt dist-upgrade -y
 
-RUN apt install -y curl bash
+RUN apt install -y curl bash ca-certificates gnupg
 
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt update -y
+
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - &&\
+    apt-get install -y nodejs
 
 RUN apt install -y --no-install-recommends \
-    nodejs \
     openssh-client \
     postgresql-client \
     make \
