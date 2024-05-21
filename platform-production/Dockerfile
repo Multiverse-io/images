@@ -5,7 +5,7 @@ ARG ALPINE_VERSION
 FROM alpine:${ALPINE_VERSION}
 
 RUN apk add --no-cache imagemagick curl postgresql13-client chromium bash jq openssl util-linux nodejs~=20.8 \
-    snappy>=1.4 libvpx postgresql-common
+    snappy~=1.4 libvpx postgresql-common
 
 RUN apk upgrade --no-cache
 
