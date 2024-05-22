@@ -3,7 +3,7 @@ FROM lacework/datacollector:latest-sidecar AS lacework-collector
 
 ARG ALPINE_VERSION
 
-RUN apk add --no-cache imagemagick curl postgresql13-client chromium bash jq openssl util-linux nodejs~=18 snappy libvpx postgresql-common
+RUN apk add --no-cache imagemagick curl postgresql13-client chromium bash jq openssl util-linux nodejs~=18 snappy libvpx 
 
 RUN apk upgrade --no-cache
 
