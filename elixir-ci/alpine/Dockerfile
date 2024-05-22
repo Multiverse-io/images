@@ -4,7 +4,8 @@ ARG ALPINE_VERSION
 
 FROM hexpm/elixir:${ELIXIR_VERSION}-erlang-${ERLANG_VERSION}-alpine-${ALPINE_VERSION}
 
-RUN apk add --no-cache curl python3 py3-pip postgresql13-client jq nodejs~=18 yarn bc git build-base imagemagick brotli chromium bash openssh-client docker-cli xvfb libc6-compat tar
+RUN apk add --no-cache curl python3 py3-pip postgresql13-client jq nodejs \
+yarn bc git build-base imagemagick brotli chromium bash openssh-client docker-cli xvfb libc6-compat tar postgresql-common=1.2-r1 yaml=0.2.5-r2 libuv=1.48.0
 
 RUN apk upgrade --no-cache
 

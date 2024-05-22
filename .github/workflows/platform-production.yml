@@ -19,27 +19,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build and push image alpine 3.18.0
+      - name: Build and push image alpine 3.19.0
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/platform-production
-          image_tag: alpine-3.18.0
+          image_tag: alpine-3.19.0
           context: ./platform-production
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
-            ALPINE_VERSION=3.18.0
+            ALPINE_VERSION=3.19.0
 
-      - name: Build and push image alpine 3.18.4
+      - name: Build and push image alpine 3.19.0
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/platform-production
-          image_tag: alpine-3.18.4
+          image_tag: alpine-3.19.0
           context: ./platform-production
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
-            ALPINE_VERSION=3.18.4
+            ALPINE_VERSION=3.19.0
 
       - name: Switch to keepalive branch
         uses: actions/checkout@v4
