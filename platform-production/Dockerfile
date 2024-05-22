@@ -4,7 +4,7 @@ FROM lacework/datacollector:latest-sidecar AS lacework-collector
 ARG ALPINE_VERSION
 FROM alpine:${ALPINE_VERSION}
 
-RUN apk add --no-cache imagemagick curl postgresql13-client chromium bash jq openssl util-linux nodejs libvpx 
+RUN apk add --no-cache imagemagick curl postgresql13-client chromium bash jq openssl util-linux nodejs libvpx postgresql-common libuv yaml
 
 RUN apk upgrade --no-cache
 
