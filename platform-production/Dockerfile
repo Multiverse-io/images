@@ -2,8 +2,9 @@ ARG ALPINE_VERSION
 FROM lacework/datacollector:latest-sidecar AS lacework-collector
 
 ARG ALPINE_VERSION
+FROM alpine:${ALPINE_VERSION}
 
-RUN apk add --no-cache imagemagick curl postgresql13-client chromium bash jq openssl util-linux nodejs~=18 snappy libvpx 
+RUN apk add --no-cache imagemagick curl postgresql13-client chromium bash jq openssl util-linux nodejs~=18 knplabs-snappy=1.4.2 libvpx 
 
 RUN apk upgrade --no-cache
 
