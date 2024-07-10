@@ -43,17 +43,17 @@ jobs:
             ERLANG_VERSION=26.2.5.1
             DEBIAN_VERSION=bookworm-20240701-slim
 
-      - name: Build and push Alpine image otp 26
+      - name: Build and push Alpine image otp 26 elixir 1.14
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-ci
-          image_tag: 1.14.5-erlang-26.2.5-alpine-3.20.1
+          image_tag: 1.14.5-erlang-26.2.5.2-alpine-3.20.1
           context: ./elixir-ci/alpine
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.14.5
-            ERLANG_VERSION=26.2.5
+            ERLANG_VERSION=26.2.5.2
             ALPINE_VERSION=3.20.1
 
       - name: Build and push Debian image
