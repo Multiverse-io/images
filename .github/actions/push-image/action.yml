@@ -16,7 +16,7 @@ inputs:
     required: true
   fail_on_security_vulnerabilities:
     description: "If false allow security vulnerabilities in built image"
-    default: true
+    default: false
     required: false
   lacework_access_token:
     description: "LW_ACCESS_TOKEN"
