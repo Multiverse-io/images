@@ -19,26 +19,26 @@ jobs:
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-cypress-ci
-          image_tag: 1.15.8-erlang-26.2.5.11-debian-bookworm-20250428-slim
+          image_tag: 1.15.8-erlang-26.2.5.13-debian-bookworm-20250630-slim
           context: ./elixir-cypress-ci
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           fail_on_security_vulnerabilities: false
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.15.8
-            ERLANG_VERSION=26.2.5.11
-            DEBIAN_VERSION=bookworm-20250428-slim
+            ERLANG_VERSION=26.2.5.13
+            DEBIAN_VERSION=bookworm-20250630-slim
 
       - name: Build and push image otp 26 elixir 1.14
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-cypress-ci
-          image_tag: 1.14.5-erlang-26.2.5.11-debian-bookworm-20250428-slim
+          image_tag: 1.14.5-erlang-26.2.5.13-debian-bookworm-20250630-slim
           context: ./elixir-cypress-ci
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           fail_on_security_vulnerabilities: false
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.14.5
-            ERLANG_VERSION=26.2.5.11
-            DEBIAN_VERSION=bookworm-20250428-slim
+            ERLANG_VERSION=26.2.5.13
+            DEBIAN_VERSION=bookworm-20250630-slim
