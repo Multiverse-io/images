@@ -32,27 +32,27 @@ jobs:
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-ci
-          image_tag: 1.17.2-erlang-26.2.5.11-debian-bookworm-20240701-slim
+          image_tag: 1.17.3-erlang-26.2.5.11-debian-bookworm-20250428-slim
           context: ./elixir-ci/debian
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
-            ELIXIR_VERSION=1.17.2
+            ELIXIR_VERSION=1.17.3
             ERLANG_VERSION=26.2.5.11
-            DEBIAN_VERSION=bookworm-20240701-slim
+            DEBIAN_VERSION=bookworm-20250428-slim
 
       - name: Build and push Debian image otp 26 elixir 1.18
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-ci
-          image_tag: 1.18.1-erlang-26.2.5.11-debian-bookworm-20241223-slim
+          image_tag: 1.18.3-erlang-26.2.5.11-debian-bookworm-20250428-slim
           context: ./elixir-ci/debian
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
-            ELIXIR_VERSION=1.18.1
+            ELIXIR_VERSION=1.18.3
             ERLANG_VERSION=26.2.5.11
-            DEBIAN_VERSION=bookworm-20241223-slim
+            DEBIAN_VERSION=bookworm-20250428-slim
 
       - name: Build and push Alpine image otp 26 elixir 1.14
         uses: ./.github/actions/push-image
@@ -71,11 +71,11 @@ jobs:
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-ci
-          image_tag: 1.16.0-erlang-26.2.5.11-debian-bookworm-20231009-slim
+          image_tag: 1.16.3-erlang-26.2.5.11-debian-bookworm-20250428-slim
           context: ./elixir-ci/debian
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
-            ELIXIR_VERSION=1.16.0
+            ELIXIR_VERSION=1.16.3
             ERLANG_VERSION=26.2.5.11
-            DEBIAN_VERSION=bookworm-20231009-slim
+            DEBIAN_VERSION=bookworm-20250428-slim
