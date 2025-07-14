@@ -67,9 +67,14 @@ runs:
         LW_ACCOUNT_SUFFIX: fra.lacework.net
         LW_SCANNER_DISABLE_UPDATES: true
 
+    - name: Extract artifact name
+      id: extract_name
+      shell: bash
+      run: echo "name=$(basename ${{ inputs.image_name }}-${{ inputs.image_tag }})" >> $GITHUB_OUTPUT
+
     - uses: actions/upload-artifact@v4
       with:
-        name: report-${{ inputs.image_name }}-${{ inputs.image_tag }}.json
+        name: report-${{ steps.extract_name.outputs.name }}.json
         path: report.json
 
     - name: Fail if vulnerabilities found
