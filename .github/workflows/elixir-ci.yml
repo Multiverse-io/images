@@ -19,14 +19,14 @@ jobs:
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-ci
-          image_tag: 1.15.8-erlang-26.2.5.11-alpine-3.20.1
+          image_tag: 1.15.8-erlang-26.2.5.11-alpine-3.20.6
           context: ./elixir-ci/alpine
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.15.8
             ERLANG_VERSION=26.2.5.11
-            ALPINE_VERSION=3.20.1
+            ALPINE_VERSION=3.20.6
 
       - name: Build and push Debian image otp 26 elixir 1.17
         uses: ./.github/actions/push-image
@@ -58,14 +58,14 @@ jobs:
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-ci
-          image_tag: 1.14.5-erlang-26.2.5.11-alpine-3.20.1
+          image_tag: 1.14.5-erlang-26.2.5.11-alpine-3.20.6
           context: ./elixir-ci/alpine
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.14.5
             ERLANG_VERSION=26.2.5.11
-            ALPINE_VERSION=3.20.1
+            ALPINE_VERSION=3.20.6
 
       - name: Build and push Debian image
         uses: ./.github/actions/push-image
