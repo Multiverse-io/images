@@ -55,6 +55,7 @@ runs:
       shell: bash
       run: |
         curl -L https://github.com/lacework/lacework-vulnerability-scanner/releases/latest/download/lw-scanner-linux-amd64 -o lw-scanner
+        df -h
         chmod +x lw-scanner
         ./lw-scanner image evaluate ${{ inputs.image_name }} ${{ inputs.image_tag }} --build-id ${{ github.run_id }} -v=true --fixable --disable-library-package-scanning > report.json
 
