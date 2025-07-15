@@ -38,13 +38,3 @@ jobs:
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ALPINE_VERSION=3.20.6
-
-      - name: Switch to keepalive branch
-        uses: actions/checkout@v4
-        with:
-          ref: keepalive
-
-      - name: Prevent GitHub from disabling workflow due to inactivity
-        uses: gautamkrishnar/keepalive-workflow@v1
-        with:
-          committer_email: engineering@multiverse.io
