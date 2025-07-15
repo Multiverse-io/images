@@ -1,5 +1,9 @@
 name: elixir-ci
 
+permissions:
+  contents: read
+  packages: write
+
 on:
   push:
     branches:
@@ -9,24 +13,37 @@ on:
     types: [assigned, opened, synchronize, reopened]
 
 jobs:
-  docker:
+  debian:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build and push Alpine image otp 26 elixir 1.15
+      - name: Build and push Debian image otp 26 elixir 1.15
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-ci
-          image_tag: 1.15.8-erlang-26.2.5.13-alpine-3.20.6
-          context: ./elixir-ci/alpine
+          image_tag: 1.15.8-erlang-26.2.5.13-debian-bookworm-20250630-slim
+          context: ./elixir-ci/debian
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.15.8
             ERLANG_VERSION=26.2.5.13
-            ALPINE_VERSION=3.20.6
+            DEBIAN_VERSION=bookworm-20250630-slim
+
+      - name: Build and push Debian image otp 26 elixir 1.16
+        uses: ./.github/actions/push-image
+        with:
+          image_name: ghcr.io/multiverse-io/elixir-ci
+          image_tag: 1.16.3-erlang-26.2.5.13-debian-bookworm-20250630-slim
+          context: ./elixir-ci/debian
+          registry_password: ${{ secrets.GITHUB_TOKEN }}
+          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
+          build_args: |
+            ELIXIR_VERSION=1.16.3
+            ERLANG_VERSION=26.2.5.13
+            DEBIAN_VERSION=bookworm-20250630-slim
 
       - name: Build and push Debian image otp 26 elixir 1.17
         uses: ./.github/actions/push-image
@@ -54,6 +71,12 @@ jobs:
             ERLANG_VERSION=26.2.5.13
             DEBIAN_VERSION=bookworm-20250630-slim
 
+  alpine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Build and push Alpine image otp 26 elixir 1.14
         uses: ./.github/actions/push-image
         with:
@@ -67,28 +90,16 @@ jobs:
             ERLANG_VERSION=26.2.5.13
             ALPINE_VERSION=3.20.6
 
-      - name: Build and push Debian image otp 26 elixir 1.16
+      - name: Build and push Alpine image otp 26 elixir 1.15
         uses: ./.github/actions/push-image
         with:
           image_name: ghcr.io/multiverse-io/elixir-ci
-          image_tag: 1.16.3-erlang-26.2.5.13-debian-bookworm-20250630-slim
-          context: ./elixir-ci/debian
-          registry_password: ${{ secrets.GITHUB_TOKEN }}
-          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
-          build_args: |
-            ELIXIR_VERSION=1.16.3
-            ERLANG_VERSION=26.2.5.13
-            DEBIAN_VERSION=bookworm-20250630-slim
-
-      - name: Build and push Debian image otp 26 elixir 1.15
-        uses: ./.github/actions/push-image
-        with:
-          image_name: ghcr.io/multiverse-io/elixir-ci
-          image_tag: 1.15.8-erlang-26.2.5.13-debian-bookworm-20250630-slim
-          context: ./elixir-ci/debian
+          image_tag: 1.15.8-erlang-26.2.5.13-alpine-3.20.6
+          context: ./elixir-ci/alpine
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.15.8
             ERLANG_VERSION=26.2.5.13
-            DEBIAN_VERSION=bookworm-20250630-slim
+            ALPINE_VERSION=3.20.6
+
