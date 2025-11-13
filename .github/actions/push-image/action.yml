@@ -95,3 +95,7 @@ runs:
         push: ${{ github.ref == 'refs/heads/main' }}
         tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
         build-args: ${{ inputs.build_args }}
+
+    - name: Delete local image
+      shell: bash
+      run: docker rmi ${{ inputs.image_name }}:${{ inputs.image_tag }} || true
