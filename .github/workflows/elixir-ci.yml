@@ -26,7 +26,6 @@ jobs:
           image_tag: 1.15.8-erlang-26.2.5.13-debian-bookworm-20251103-slim
           context: ./elixir-ci/debian
           registry_password: ${{ secrets.GITHUB_TOKEN }}
-          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.15.8
             ERLANG_VERSION=26.2.5.13
@@ -39,7 +38,6 @@ jobs:
           image_tag: 1.16.3-erlang-26.2.5.13-debian-bookworm-20251103-slim
           context: ./elixir-ci/debian
           registry_password: ${{ secrets.GITHUB_TOKEN }}
-          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.16.3
             ERLANG_VERSION=26.2.5.13
@@ -52,7 +50,6 @@ jobs:
           image_tag: 1.17.3-erlang-26.2.5.13-debian-bookworm-20251103-slim
           context: ./elixir-ci/debian
           registry_password: ${{ secrets.GITHUB_TOKEN }}
-          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.17.3
             ERLANG_VERSION=26.2.5.13
@@ -65,7 +62,6 @@ jobs:
           image_tag: 1.18.4-erlang-26.2.5.13-debian-bookworm-20251103-slim
           context: ./elixir-ci/debian
           registry_password: ${{ secrets.GITHUB_TOKEN }}
-          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.18.4
             ERLANG_VERSION=26.2.5.13
@@ -84,7 +80,6 @@ jobs:
           image_tag: 1.14.5-erlang-26.2.5.13-alpine-3.20.6
           context: ./elixir-ci/alpine
           registry_password: ${{ secrets.GITHUB_TOKEN }}
-          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.14.5
             ERLANG_VERSION=26.2.5.13
@@ -97,7 +92,6 @@ jobs:
           image_tag: 1.15.8-erlang-26.2.5.13-alpine-3.20.6
           context: ./elixir-ci/alpine
           registry_password: ${{ secrets.GITHUB_TOKEN }}
-          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.15.8
             ERLANG_VERSION=26.2.5.13
@@ -110,7 +104,6 @@ jobs:
           image_tag: 1.16.3-erlang-26.2.5.13-alpine-3.20.6
           context: ./elixir-ci/alpine
           registry_password: ${{ secrets.GITHUB_TOKEN }}
-          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ELIXIR_VERSION=1.16.3
             ERLANG_VERSION=26.2.5.13
