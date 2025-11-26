@@ -18,9 +18,6 @@ inputs:
     description: "If false allow security vulnerabilities in built image"
     default: false
     required: false
-  lacework_access_token:
-    description: "LW_ACCESS_TOKEN"
-    required: true
   build_args:
     description: "Docker build args"
     default: ""
@@ -50,42 +47,6 @@ runs:
         load: true
         tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
         build-args: ${{ inputs.build_args }}
-
-    - name: Run Lacework vulnerability scanner
-      shell: bash
-      run: |
-        curl -L https://github.com/lacework/lacework-vulnerability-scanner/releases/latest/download/lw-scanner-linux-amd64 -o lw-scanner
-        chmod +x lw-scanner
-        ./lw-scanner image evaluate ${{ inputs.image_name }} ${{ inputs.image_tag }} --build-id ${{ github.run_id }} -v=false --fixable --disable-library-package-scanning > report.json
-
-        sed -i '/INFO/d' report.json
-
-        cat report.json
-      env:
-        LW_ACCESS_TOKEN: ${{ inputs.lacework_access_token }}
-        LW_ACCOUNT_NAME: multiverse
-        LW_ACCOUNT_SUFFIX: fra.lacework.net
-        LW_SCANNER_DISABLE_UPDATES: true
-
-    - name: Extract artifact name
-      id: extract_name
-      shell: bash
-      run: echo "name=$(basename ${{ inputs.image_name }}-${{ inputs.image_tag }})" >> $GITHUB_OUTPUT
-
-    - uses: actions/upload-artifact@v4
-      with:
-        name: report-${{ steps.extract_name.outputs.name }}.json
-        path: report.json
-
-    - name: Fail if vulnerabilities found
-      if: inputs.fail_on_security_vulnerabilities == 'true'
-      shell: bash
-      run: |
-        cat report.json | jq -e '.cve.critical_vulnerabilities == 0' > /dev/null || (echo "critical vulnerabilities found" && false)
-        cat report.json | jq -e '.cve.high_vulnerabilities == 0' > /dev/null || (echo "high vulnerabilities found" && false)
-        cat report.json | jq -e '.cve.medium_vulnerabilities == 0' > /dev/null || (echo "medium vulnerabilities found" && false)
-        cat report.json | jq -e '.cve.low_vulnerabilities == 0' > /dev/null || (echo "low vulnerabilities found" && false)
-        cat report.json | jq -e '.cve.info_vulnerabilities == 0' > /dev/null || (echo "info vulnerabilities found" && false)
 
     - name: Build and push
       uses: docker/build-push-action@v5

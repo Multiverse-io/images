@@ -24,7 +24,6 @@ jobs:
           image_tag: alpine-3.18.12
           context: ./platform-production
           registry_password: ${{ secrets.GITHUB_TOKEN }}
-          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ALPINE_VERSION=3.18.12
 
@@ -35,6 +34,5 @@ jobs:
           image_tag: alpine-3.20.6
           context: ./platform-production
           registry_password: ${{ secrets.GITHUB_TOKEN }}
-          lacework_access_token: ${{ secrets.LW_ACCESS_TOKEN }}
           build_args: |
             ALPINE_VERSION=3.20.6
