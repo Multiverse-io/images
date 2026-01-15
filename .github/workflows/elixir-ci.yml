@@ -67,6 +67,18 @@ jobs:
             ERLANG_VERSION=26.2.5.13
             DEBIAN_VERSION=bookworm-20251103-slim
 
+      - name: Build and push Debian image otp 26 elixir 1.19
+        uses: ./.github/actions/push-image
+        with:
+          image_name: ghcr.io/multiverse-io/elixir-ci
+          image_tag: 1.19.5-erlang-26.2.5.13-debian-bookworm-20260112-slim
+          context: ./elixir-ci/debian
+          registry_password: ${{ secrets.GITHUB_TOKEN }}
+          build_args: |
+            ELIXIR_VERSION=1.19.5
+            ERLANG_VERSION=26.2.5.13
+            DEBIAN_VERSION=bookworm-20260112-slim
+
   alpine:
     runs-on: ubuntu-latest
     steps:
